@@ -1,0 +1,23 @@
+# Standards: 0.1
+---
+- name: Fact vagrant user
+  set_fact:
+    vagrant_user: "{{ vagrant_user | default(homebrew_user) | default(ansible_user_id) }}"
+  tags:
+    - vagrant
+
+- become: "{{ (vagrant_user != ansible_user_id) | bool }}"
+  become_user: "{{ vagrant_user }}"
+  block:
+    - name: Install required package
+      ignore_errors: True
+      homebrew_cask:
+        name: vagrant
+        greedy: True
+        options: appdir=/Applications
+        accept_external_apps: False
+        state: upgraded
+      tags:
+        - vagrant
+
+...

@@ -1,0 +1,7 @@
+# Standards: 0.1
+---
+# @var vagrant_user:description: User to run user-specific commands
+# @var vagrant_user:value: vagrant_user | default(homebrew_user) | default(ansible_user_id)
+# vagrant_user:
+
+...
